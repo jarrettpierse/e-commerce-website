@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    body {
+      background: #ddd;
+      min-height: 100vh;
+      vertical-align: middle;
+      display: flex;
+      font-family: sans-serif;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .title {
+      margin-bottom: 5vh;
+    }
+
+    .card {
+      margin: auto;
+      max-width: 950px;
+      width: 90%;
+      box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border-radius: 1rem;
+      border: transparent;
+    }
+
+    @media (max-width: 767px) {
+      .card {
+        margin: 3vh auto;
+      }
+    }
+
+    .cart {
+      background-color: #fff;
+      padding: 4vh 5vh;
+      border-bottom-left-radius: 1rem;
+      border-top-left-radius: 1rem;
+    }
+
+    @media (max-width: 767px) {
+      .cart {
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem;
+      }
+    }
+
+    .summary {
+      background-color: #ddd;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      padding: 4vh;
+      color: rgb(65, 65, 65);
+    }
+
+    @media (max-width: 767px) {
+      .summary {
+        border-top-right-radius: unset;
+        border-bottom-left-radius: 1rem;
+      }
+    }
+
+    .title b {
+      font-size: 1.5rem;
+    }
+
+    .main {
+      margin: 0;
+      padding: 2vh 0;
+      width: 100%;
+    }
+
+    .col-2,
+    .col {
+      padding: 0 1vh;
+    }
+
+    a {
+      padding: 0 1vh;
+    }
+
+    .close {
+      margin-left: auto;
+      font-size: 0.7rem;
+    }
+
+    img {
+      width: 3.5rem;
+    }
+
+    .back-to-shop {
+      margin-top: 4.5rem;
+    }
+
+    h5 {
+      margin-top: 4vh;
+    }
+
+    hr {
+      margin-top: 1.25rem;
+    }
+
+    input:focus::-webkit-input-placeholder {
+      color: transparent;
+    }
+  </style>
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+    <link rel="stylesheet" href="/styles/quantity-select.css" />
+    <script type="text/javascript">
+      $(function () {
+        $("#totalCost").load("/fragments/cartSummary");
+      });
+    </script>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div th:replace="fragments/covid-banner.html"></div>
+    <div class="container">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-9 cart">
+            <div class="title">
+              <div class="row">
+                <div class="col text-center">
+                  <h4><b>Shopping Cart</b></h4>
+                </div>
+              </div>
+            </div>
+            <div
+              class="row border-top border-bottom"
+              th:each="product : ${basket.products}"
+              th:id="|product_${product.id}|"
+            >
+              <div class="row main align-items-center">
+                <div class="col-2">
+                  <img
+                    class="img-fluid"
+                    th:src="@{${'/images/products/' + product.imageURL}}"
+                  />
+                </div>
+                <div class="col-3">
+                  <div class="row text-muted" th:text="${product.type}"></div>
+                  <div class="row" th:text="${product.name}"></div>
+                </div>
+                <div
+                  class="col-2"
+                  th:text="'€ ' + ${#numbers.formatDecimal(product.price, 1, 'DEFAULT', 2, 'DEFAULT')}"
+                >
+                  <span class="close">&#10005;</span>
+                </div>
+                <div class="col-3" style="margin-left: 13px">
+                  <div class="input-group">
+                    <input
+                      type="button"
+                      value="-"
+                      class="button-minus"
+                      data-field="quantity"
+                      id="quantity"
+                      th:onclick="|decrementValue(${product.id})|"
+                    />
+                    <input
+                      type="number"
+                      step="1"
+                      max=""
+                      min="1"
+                      th:value="${basket.productCounts.get(product.id)}"
+                      name="quantity"
+                      class="quantity-field"
+                      th:id="|quantity_input_${product.id}|"
+                    />
+                    <input
+                      type="button"
+                      value="+"
+                      class="button-plus"
+                      data-field="quantity"
+                      th:onclick="|incrementValue(${product.id})|"
+                    />
+                  </div>
+                </div>
+                <div class="col">
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger bi bi-trash-fill"
+                    th:onclick="|removeProduct(${product.id})|"
+                  ></button>
+                </div>
+              </div>
+            </div>
+            <div class="back-to-shop">
+              <a href="/products" class="btn btn-outline-primary"
+                >&leftarrow; Back to catalouge</a
+              >
+            </div>
+          </div>
+          <div class="col-md-3 summary text-center">
+            <div>
+              <h5><b>Summary</b></h5>
+            </div>
+            <hr />
+            <div class="row">
+              <div id="totalCost"></div>
+            </div>
+          <div>
+            <h6 sec:authorize="isAnonymous()" class="pt-3">You must be logged-in to checkout!</h6>
+            <h6 sec:authorize="isAnonymous()">Please register or login using one of the given buttons below</h6>
+            <a class="btn btn-primary mt-5" aria-current="page" href="/sign-up" sec:authorize="isAnonymous()">Register</a>
+            <a class="btn btn-primary mt-5" aria-current="page" href="/login" sec:authorize="isAnonymous()">Login</a>
+            <a class="btn btn-primary mt-5" aria-current="page" href="/checkout" sec:authorize="isAuthenticated()">Checkout</a>
+          </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <div class="row d-flex justify-content-center g-1"></div>
+    </div>
+    <div th:replace="fragments/footer.html"></div>
+  </body>
+
+  <script src="/js/basket/basket-action.js"></script>
+</html>

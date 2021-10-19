@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .form-group,
+    .input-group {
+      padding-top: 3px;
+      padding-bottom: 3px;
+    }
+    .input-group-text {
+      height: 100%;
+    }
+  </style>
+
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div th:replace="fragments/covid-banner.html"></div>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
+    />
+    <div class="container">
+      <div class="alert alert-dark text-center" role="alert">
+        Please note that our system will have to verify you before you can make changes to the store 
+      </div>
+      <div class="card bg-light">
+        <article class="card-body mx-auto" style="max-width: 400px">
+          <h4 class="card-title mt-3 text-center">Create Account</h4>
+          <p class="text-center">Get started with your free account</p>
+          <form class="needs-validation" action="javascript:void(0);">
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+              </div>
+              <input
+                id="firstname"
+                class="form-control"
+                placeholder="First name"
+                type="text"
+                required
+              />
+            </div>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-user"></i></span>
+              </div>
+              <input
+                id="lastname"
+                class="form-control"
+                placeholder="Last name"
+                type="text"
+                required
+              />
+            </div>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-id-card"></i>
+                </span>
+              </div>
+              <input
+                id="username"
+                class="form-control"
+                placeholder="User Name"
+                type="text"
+                required
+              />
+            </div>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+              <input
+                id="email"
+                class="form-control"
+                placeholder="Email address"
+                type="email"
+                required
+              />
+            </div>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-phone"></i>
+                </span>
+              </div>
+              <input
+                id="phone"
+                class="form-control"
+                placeholder="Phone number"
+                type="tel"
+              />
+            </div>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              </div>
+              <input
+                id="password"
+                class="form-control"
+                placeholder="Create password"
+                type="password"
+                required
+              />
+            </div>
+            <div
+              class="form-group"
+              style="
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <button
+                type="submit"
+                class="btn btn-primary btn-block"
+                id="submit-button"
+              >
+                Create Account
+              </button>
+            </div>
+            <p class="text-center">
+              Have an account?
+              <a href="/login">Log In</a>
+            </p>
+          </form>
+        </article>
+      </div>
+    </div>
+    <div class="modal fade" id="success-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-success">Account Created!</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Account successfully created. You will be redirected to the login
+              page shortly.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="failure-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-danger">Failed to Create Account</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Unfortunately, something went wrong, and the account could not be
+              created.
+            </p>
+            <h5>Error Message:</h5>
+            <p id="failure-error-message"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments/footer.html"></div>
+  </body>
+
+  <script src="/js/account/admin.js"></script>
+</html>

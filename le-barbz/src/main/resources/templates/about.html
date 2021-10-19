@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+  </head>
+
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div class="container justify-content-center">
+      <div class="row">
+        <div class="card col">
+          <div class="card-body text-center">
+            <h5 class="card-title">The Barbz Story</h5>
+            <p class="card-text" style="text-align: justify">
+              At Le Barbz we come to work every day because we want to solve the
+              biggest problem in the world right now. How do save money, spread
+              a meaningful message and look good all at once? This is a question
+              that has fascinated us for nearly two decades. After years of
+              research, we have discovered the secret formula to solve this
+              problem.
+              <br />
+              <br />
+              Le Barbz are here to inform, entertain, inspire and clothe you. On
+              our website you will find a range of items to suit your needs. Our
+              products are perfect gifts for birthdays, weddings, aniversaries,
+              graduations, christmas, valentines day, St. Patrick's day,
+              Halloween, St. Brigid's Day, National Pizza Day, and every other
+              day of the year. We carry a wide range of aparrel as well as
+              cutlery and fashion face masks. We pride ourselves in the quality
+              of out being super excellent and made from 100% recycled
+              materials.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card col">
+          <div class="card-body text-center">
+            <h4 class="card-title">Meet the team</h4>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                <div class="team text-center rounded p-3 py-4">
+                  <img
+                    src="images/jarrett.jpg"
+                    class="img-fluid avatar avatar-medium shadow rounded-pill"
+                    alt=""
+                  />
+                  <div class="content mt-3">
+                    <h4 class="title mb-0">Jarrett Pierse</h4>
+                    <small class="text-muted">Founder</small>
+
+                    <!--end icon-->
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                <div class="team text-center rounded p-3 py-4">
+                  <img
+                    src="images/thomas.jpg"
+                    class="img-fluid avatar avatar-medium shadow rounded-pill"
+                    alt=""
+                  />
+                  <div class="content mt-3">
+                    <h4 class="title mb-0">Thomas O'Gara</h4>
+                    <small class="text-muted">C.E.O.</small>
+
+                    <!--end icon-->
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                <div class="team text-center rounded p-3 py-4">
+                  <img
+                    src="images/adam.jpg"
+                    class="img-fluid avatar avatar-medium shadow rounded-pill"
+                    alt=""
+                  />
+                  <div class="content mt-3">
+                    <h4 class="title mb-0">Adam Leacy</h4>
+                    <small class="text-muted">Manager</small>
+
+                    <!--end icon-->
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+
+              <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
+                <div class="team text-center rounded p-3 py-4">
+                  <img
+                    src="images/katarina.jpg"
+                    class="img-fluid avatar avatar-medium shadow rounded-pill"
+                    alt=""
+                  />
+                  <div class="content mt-3">
+                    <h4 class="title mb-0">Katarina Cvetkovic</h4>
+                    <small class="text-muted">Accountant</small>
+                    <!--end icon-->
+                  </div>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end row-->
+          </div>
+        </div>
+      </div>
+      <!--start map row-->
+      <div class="row">
+        <div class="card col">
+          <div class="card-body text-center">
+            <h5 class="card-title">Our Offices</h5>
+          </div>
+          <div class="map-container">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9535.594696778555!2d-6.2238835!3d53.3092609!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80dd297b516d89b5!2sUCD%20School%20of%20Computer%20Science!5e0!3m2!1sen!2sie!4v1614714344109!5m2!1sen!2sie"
+              width="100%"
+              height="500px"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+      <!--start contact us row-->
+      <div class="row">
+        <div class="card col">
+          <div class="card-body text-center">
+            <h5 class="card-title">Contact Us</h5>
+            <p>
+              Please leave us a message below and we will get back to you as
+              soon as we can.
+            </p>
+            <form action="javascript:void(0);">
+              <div class="row">
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    placeholder="Name"
+                  />
+                </div>
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group">
+                  <label for="message"></label>
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    rows="5"
+                    placeholder="Message"
+                  ></textarea>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="form-group">
+                  <label for="submit"></label>
+                  <button class="btn btn-primary" type="submit" th:onclick="|sendEmail()|">
+                    Submit form
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments/footer.html"></div>
+  </body>
+
+  <script src="/js/about/email.js"></script>
+</html>

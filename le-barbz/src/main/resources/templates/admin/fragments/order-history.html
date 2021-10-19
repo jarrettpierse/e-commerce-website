@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="card bg-white shadow">
+    <div class="card-body text-black">
+      <div class="row main align-items-center border-top border-bottom">
+        <div class="col order-first p-3">Order ID</div>
+        <div class="col p-3">Customer ID</div>
+        <div class="col p-3">Order Status</div>
+        <div class="col order-last"></div>
+      </div>
+      <div class="row main align-items-center border-top border-bottom" th:each="order : ${orders}">
+        <div class="col order-first p-3" th:text="${order.getId()}"></div>
+        <div class="col p-3" th:text="${order.getCustomer().getId()}"></div>
+        <div class="col p-3" th:text="${order.getState()}"></div>
+        <div class="col order-last">
+          <a type="button" class="btn btn-info" th:href="@{/admin/edit-order/{id}(id = ${order.getId()})}">View/Change Order</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

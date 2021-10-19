@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+    <style>
+      .container .btn {
+        font-size: larger;
+      }
+      .form-group {
+        padding: 2px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div class="container">
+      <div class="row mt-4 text-center">
+        <div class="card col">
+          <div class="card-body">
+            <h5 class="card-title">Edit Product Details</h5>
+            <form
+              th:action="@{/product/edit/} + ${product.id}"
+              th:object="${product}"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="form-group row">
+                <label for="name" class="col-sm-2 col-form-label"
+                  >Product:</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    th:value="${product.getName()}"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="type" class="col-sm-2 col-form-label"
+                  >Category:</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="type"
+                    th:value="${product.getType()}"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="quantity" class="col-sm-2 col-form-label"
+                  >Quantity:</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="quantity"
+                    th:value="${product.getQuantity()}"
+                    min="1"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="price" class="col-sm-2 col-form-label"
+                  >Price:</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="number"
+                    min="0"
+                    step=".01"
+                    class="form-control"
+                    name="price"
+                    th:value="${product.getPrice()}"
+                  />
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label"
+                  >Description:</label
+                >
+                <div class="col-sm-10">
+                  <textarea
+                    class="form-control"
+                    name="description"
+                    rows="3"
+                    th:text="${product.getDescription()}"
+                  ></textarea>
+                </div>
+              </div>
+              <br />
+              <div class="form-group">
+                <input
+                  type="file"
+                  name="image"
+                  accept="image/png, image/jpeg"
+                  th:value="${product.getImageURL()}"
+                />
+              </div>
+              <br />
+              <button
+                type="submit"
+                class="btn btn-info"
+                id="addToInventory"
+              >
+                Edit Details
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <br>
+          <a href="/admin/view-inventory" class="btn btn-outline-info"
+            >&leftarrow; Back to inventory</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+  <div th:replace="fragments/footer.html"></div>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+    <style>
+      .card {
+        margin: auto;
+        max-width: 950px;
+        width: 90%;
+        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 1rem;
+        border: transparent;
+      }
+
+      @media (max-width: 767px) {
+        .card {
+          margin: 3vh auto;
+        }
+      }
+      .row {
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div th:replace="fragments/covid-banner.html"></div>
+    <div class="container">
+      <div class="text-center">
+        <h1><b th:text="'Order #' + ${order.getId()}"></b></h1>
+      </div>
+      <div class="card p-3">
+        <div class="row">
+          <div class="row">
+            <div class="col">
+              <a href="/admin" class="btn btn-outline-primary"
+                >&leftarrow; Back to dashboard</a
+              >
+              
+            </div>
+            <div class="col" style="text-align: right;">
+              <button class="btn btn-outline-primary" th:onclick="|emailCustomer(${order.getId()})|"
+                > Email Customer</button
+              >
+            </div>
+          </div>
+          <div class="dropdown text-center">
+            
+            <h5><p th:text="'Order Current state: ' + ${order.getState()}"></p></h5>
+            <h5>Change order state</h5>
+            <button class="btn btn-success mt-2" type="button" id="NEW" name="NEW" th:onclick="|editState(${order.getId()},'NEW')|">
+              New
+            </button>
+            <button class="btn btn-warning mt-2" type="button" id="SHIPPED" name="SHIPPED" th:onclick="|editState(${order.getId()},'SHIPPED')|">
+              Shipped
+            </button>
+            <button class="btn btn-info mt-2" type="button" id="DELIVERED" name="DELIVERED" th:onclick="|editState(${order.getId()},'DELIVERED')|">
+              Delivered
+            </button>
+            <button class="btn btn-danger mt-2" type="button" id="CANCELLED" name="CANCELLED" th:onclick="|editState(${order.getId()},'CANCELLED')|">
+              Cancelled
+            </button>
+          </div>
+          <div class="title" th:each="product : ${order.getProducts()}">
+            <div class="row">
+              <div class="row main align-items-center">
+                <div class="col-3">
+                  <img class="img-thumbnail" th:src="@{${'/images/products/' + product.imageURL}}" />
+                </div>
+                <div class="col text-right">
+                  <div class="col" th:text="'Product Name:  ' + ${product.getName()}"></div>
+                  <div class="col" th:text="'Product Type:  ' + ${product.getType()}"></div>
+                  <div class="col" th:text="'Units: ' + ${order.getUnits().get(product.getId())}"></div>
+                  <div class="col" th:text="'Original price for a unit: €' + ${#numbers.formatDecimal(order.getPricesCharged().get((product.getId() * 1.0)), 1, 'DEFAULT', 2, 'DEFAULT')}"></div>
+                  <div class="col" th:text="'Cost in total: €' + ${#numbers.formatDecimal(order.getPricesCharged().get((product.getId() * 1.0)) * order.getUnits().get(product.getId()), 1, 'DEFAULT', 2, 'DEFAULT')}"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <h3><b th:text="'Total Cost: €' + ${#numbers.formatDecimal(order.getTotalCost(), 1, 'DEFAULT', 2, 'DEFAULT')}"></b></h3>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="success-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-success">State Successfully Modified!</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              State successfully modified. Please wait while
+              the page redirects to the dashboard.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments/footer.html"></div>
+  </body>
+  <script src="/js/admin/edit-order.js"></script>
+</html>

@@ -1,0 +1,8 @@
+/*
+ * Universal Styles. Should be imported in all pages.
+ */
+
+html {
+  /* Resize font relative to the user's configured font size. Can be resized by the user using standard zoom controls. */
+  font-size: 1rem;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div th:replace="fragments/covid-banner.html"></div>
+    <div class="container justify-content-center">
+        <div class="row">
+          <div class="card col">
+            <div class="card-body text-center">
+              <h3 class="card-title">Thanks for shopping with us!</h3>
+              <p>
+                  Your order will be with you in 3-5 business days.
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer.html"></div>
+  </body>
+</html>

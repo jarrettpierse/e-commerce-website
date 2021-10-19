@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+  body {
+    text-align: justify;
+  }
+
+  .icon_wrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 10px solid black;
+    border-radius: 1.5vw;
+    width: 100%;
+  }
+
+  .guideline-wrapper {
+    text-align: center;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .warning-text {
+    color: red;
+  }
+
+  p {
+    font-size: large;
+  }
+
+  .title{
+    text-align: center;
+  }
+</style>
+
+<head>
+  <div th:replace="fragments/head.html"></div>
+  <title>Le Barbz</title>
+</head>
+
+<body class="bg-light d-flex flex-column min-vh-100">
+  <div th:replace="fragments/header.html"></div>
+  <div th:replace="fragments/covid-banner.html"></div>
+  <div class="container">
+    <div class="card bg-light">
+      <div style="padding: 15px;">
+        <div class="title">
+          <h2><strong>Covid-19 Guidance</strong></h2></div>
+        <p>
+          As many facets of life have been altered by the novel coronavirus (COVID-19),
+          it is important to us that we ensure your customer experience
+          does not change.
+          To help keep our customers and colleagues safe, Le Barbz has
+          closed all our physical store locations. We have also suspended
+          all workshops and face-to-face meetings, and will continue to
+          evaluate this rapidly evolving situation. The health and safety
+          of our staff, customers, and community is our top
+          priority.
+        </p>
+        <p>
+          We have introduced contact-free delivery for all our orders. You do not
+          need to take any action to enable this. Our couriers are offering this as
+          a standard.
+          You may experience some delays to your order's delivery and currently
+          we are unable to offer our next-day delivery service.
+        </p>
+        <p>
+          Stores in the Republic of Ireland are expected to reopen in late April.
+          We want to ensure that our stores remain a safe place and so we ask that
+          you continue to follow all social distancing guidelines given by the
+          government. We are currently installing additional safety measures such
+          as perspex screens, sanitation stations and spaced aisles.
+        </p>
+        <p>
+          Our state of the art Le Barbz facemasks offer the highest grade of
+          protection from respiratory particles and can be purchased from our
+          store in a variety of colours and designs. The tailored design fits
+          every face perfectly. Sold with a pack of 3 resuable filters (which
+          offer protection for PM2.5 and even tinier particles), the cotton
+          filter pocket ensures a comfortable fit with no irritation.
+          Adjustable ear straps can be set to your desired fit, and the metal
+          nose piece guarantees no covid will be getting in your lungs! Buy
+          a <a href="/products/facamasks">Le Barbz facemask</a> and stay safe
+          and stylish during this pandemic!
+        </p>
+        <p class="warning-text">
+          For more information on how you can stop the spread visit <a
+            href="https://www2.hse.ie/coronavirus/">hse.ie</a>
+        </p>
+        <div class="guideline-container" id="covid-guidelines">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="icon_wrapper"><img src="images/hand_washing.png"
+                  alt="Yellow sweatshirt with rataouille graphic" /></div>
+              <div class="guideline-wrapper">
+                <p>Wash your hands often with soap and water for 20 seconds or
+                  alcohol-based hand sanitizer</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="icon_wrapper"><img src="images/social_distancing.png" alt="facemask with Remy's smile" />
+              </div>
+              <div class="guideline-wrapper">
+                <p>Practice social distancing by keeping at least 2 meters (6 feet) apart</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="icon_wrapper"><img src="images/avoid_touching.png" alt="Plus toy Remy from Ratatouille" />
+              </div>
+              <div class="guideline-wrapper">
+                <p>Avoid touching eyes, nose and mouth</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="icon_wrapper"><img src="images/informed_logo.png"
+                  alt="From left to right: fork, knifem tablespoon, teaspoon" /></div>
+              <div class="guideline-wrapper">
+                <p>Stay informed and follow the advice of your local public health authority</p>
+              </div>
+            </div>
+          </div>
+          <!-- end row -->
+        </div>
+        <!-- end container -->
+      </div>
+    </div>
+</body>
+
+</html>

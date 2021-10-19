@@ -1,0 +1,4 @@
+<div
+  class="col"
+  th:text="'Total Cost: € ' + ${#numbers.formatDecimal(basket.getCost(), 1, 'DEFAULT', 2, 'DEFAULT')}"
+></div>

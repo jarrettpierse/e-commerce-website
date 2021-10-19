@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+    <style>
+      .container .btn {
+        font-size: larger;
+      }
+      .form-group {
+        padding: 2px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div class="container">
+      <div class="row mt-4 text-center">
+        <div class="card col">
+          <div class="card-body text-black">
+            <div class="row main align-items-center border-top border-bottom">
+              <div class="col order-first p-3">Product ID</div>
+              <div class="col p-3">Product Name</div>
+              <div class="col p-3">Units in stock</div>
+
+              <div class="col order-last"></div>
+              <div class="col order-last"></div>
+            </div>
+            <div
+              class="row main align-items-center border-top border-bottom"
+              th:each="product : ${products}"
+            >
+              <div class="col order-first p-3" th:text="${product.id}"></div>
+              <div class="col p-3" th:text="${product.name}"></div>
+              <div class="col p-3" th:text="${product.quantity}"></div>
+              <div class="col order-last">
+                <a
+                  class="btn btn-info"
+                  th:href="@{/admin/edit-product/{id}(id=${product.id})}"
+                >
+                  Edit Product
+                </a>
+              </div>
+              <div class="col order-last">
+                <span th:id="'hide-buttons-' + ${product.id}">
+                  <button
+                    class="btn btn-info"
+                    id="unhide"
+                    th:onclick="|unhideProduct(${product.id})|"
+                    th:if="${product.hidden}"
+                  >
+                    Unhide
+                  </button>
+                  <button
+                    class="btn btn-info"
+                    id="hide"
+                    th:onclick="|hideProduct(${product.id})|"
+                    th:unless="${product.hidden}"
+                  >
+                    Hide
+                  </button>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <br>
+            <a href="/admin" class="btn btn-outline-info"
+              >&leftarrow; Back to dashboard</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <div th:replace="fragments/footer.html"></div>
+
+  <script src="/js/admin/inventory.js"></script>
+</html>

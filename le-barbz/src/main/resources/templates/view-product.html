@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+
+.single_product {
+    padding-top: 66px;
+    padding-bottom: 140px;
+    background-color: #e5e5e5;
+    margin-top: 0px;
+    padding: 17px
+}
+
+.product_name {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 0px
+}
+
+.product_price {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 9px;
+    clear: left
+}
+
+.singleline {
+    margin-top: 1rem;
+    margin-bottom: .40rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, .1)
+}
+
+.product_info {
+    color: #4d4d4d;
+    display: inline-block
+}
+
+.product_description {
+    padding-left: 0px
+}
+
+.image_selected {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% + 15px);
+    height: 525px;
+    -webkit-transform: translateX(-15px);
+    -moz-transform: translateX(-15px);
+    -ms-transform: translateX(-15px);
+    -o-transform: translateX(-15px);
+    transform: translateX(-15px);
+    border: solid 1px #e8e8e8;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 15px
+}
+
+.image_list li {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 165px;
+    border: solid 1px #e8e8e8;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.1) !important;
+    margin-bottom: 15px;
+    cursor: pointer;
+    padding: 15px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;
+    overflow: hidden
+}
+
+.row-underline {
+    content: "";
+    display: block;
+    border-bottom: 2px solid #3798db;
+    margin: 0px 0px;
+    margin-bottom: 20px;
+    margin-top: 15px
+}
+
+.subsection {
+    margin-left: -10px;
+    font-size: 25px;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 700
+}
+
+.vertical-line {
+    display: inline-block;
+    border-left: 3px solid #167af6;
+    margin: 0 10px;
+    height: 364px;
+    margin-top: 4px
+}
+
+.items_text {
+    color: #b0b0b0
+}
+
+.p_specification {
+    font-weight: 500;
+    margin-left: 22px
+}
+
+div {
+    display: block;
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.single_product {
+    background-color: inherit;
+    padding-top: 16px;
+    padding-bottom: 140px;
+}
+
+.image_selected img {
+    max-width: 100%
+}
+
+.super_container{
+    background-color: inherit;
+    margin:auto;
+}
+</style>
+<head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>  
+    <link rel="stylesheet" href="/styles/quantity-select.css">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div class="container justify-content-center">
+        <div class="super_container">
+            <div class="single_product">
+                <div class="container-fluid" style=" background-color: #fff; padding: 11px;">
+                    <div class="row">
+                        <div class="col-lg-4 order-lg-2 order-1">
+                            <div class="image_selected">
+                                <img th:src="@{${'/images/products/' + product.imageURL}}" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-8 order-2" >
+                            <div class="product_description">
+                                <nav>
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                        <li class="breadcrumb-item"><a href="/products">Products</a></li>
+                                        <li class="breadcrumb-item active"><a th:text="${#strings.capitalize(product.type)}" th:href="|/products/${product.type}|"></a></li>
+                                    </ol>
+                                </nav>
+                                <div class="product_name" th:text="${product.name}"></div>
+                                <div> <span class="product_price" th:text="'€' + ${#numbers.formatDecimal(product.price, 1, 'DEFAULT', 2, 'DEFAULT')}"></span> </div>
+                                <hr class="singleline">
+                                <div> 
+                                    <span class="product_info" th:text="${product.description}"></span>
+                                    <br><br>
+                                    
+                                    <span class="product_info">In Stock.</span> 
+                                </div>
+                                <hr class="singleline">
+                                <br>
+                                <form action="javascript:void(0);">
+                                    <div class="row">
+                                        <div class="col-xs-6" style="margin-left: 13px;">
+                                            <label for="quantity">Quantity: </label>
+                                            <div class="input-group">
+                                                <input type="button" value="-" class="button-minus" data-field="quantity" id="quantity">
+                                                <input type="number" step="1" max="" min="1" value="1" name="quantity" class="quantity-field" id="quantity_input">
+                                                <input type="button" value="+" class="button-plus" data-field="quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-6" style="margin-left: 13px;">
+                                            <button class="btn btn-primary" id="cart" th:onclick="|addToCart(${product.id})|">
+                                                Add to Cart
+                                            </button>
+                                            <span id="wishlist-buttons">
+                                                <button class="btn btn-primary" id="wishlist" th:onclick="|removeFromWishlist(${product.id})|" th:if="${isInWishlist}">
+                                                    Remove from wishlist
+                                                </button>
+                                                <button class="btn btn-primary" id="wishlist" th:onclick="|addToWishlist(${product.id})|" th:unless="${isInWishlist}">
+                                                    Add to wishlist
+                                                </button>
+                                            </span>
+                                        </div> 
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6" style="margin-left: 13px;">
+                                            <br>
+                                            <div id="response"></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-underline">
+                        <div class="col-md-6"> <span class=" subsection
+                        ">More <span th:text="${#strings.capitalize(product.type)}"></span></span> </div>
+                        <div class="col-md-6"> <a href="#" data-abc="true"> <span class="ml-auto view-all"></span> </a> </div>
+                    </div>
+                    <div class="row">
+                        <div th:replace="fragments/product-grid.html"></div>
+                    </div>
+                </div>
+            </div></div>
+        </div>
+    </div>
+    <div th:replace="fragments/footer.html"></div>
+</body>
+
+<script src="/js/basket/quantity-select.js"></script>
+<script src="/js/product-view/product-action.js"></script>
+</html>

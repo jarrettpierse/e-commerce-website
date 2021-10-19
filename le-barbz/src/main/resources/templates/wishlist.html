@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+    <style>
+      .card {
+        margin: auto;
+        max-width: 950px;
+        width: 90%;
+        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 1rem;
+        border: transparent;
+      }
+
+      @media (max-width: 767px) {
+        .card {
+          margin: 3vh auto;
+        }
+      }
+      .row {
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div th:replace="fragments/covid-banner.html"></div>
+    <div class="container">
+      <div class="text-center">
+        <h1><b>Wishlist</b></h1>
+      </div>
+      <div class="card">
+        <div class="row">
+          <div class="title">
+            <div class="row">
+              <div
+                th:each="product: ${wishlist.getProducts()}"
+                class="row main align-items-center"
+                th:id="|product-${product.id}|"
+              >
+                <div class="col-3">
+                  <img
+                    class="img-fluid"
+                    th:src="${'/images/products/' + product.imageURL}"
+                    th:alt="|image of ${product.name}|"
+                  />
+                </div>
+                <div class="col text-right">
+                  <h4 th:text="${product.name}"></h4>
+                  <h6 th:text="${product.type}"></h6>
+                  <h4
+                    th:text="'€' + ${#numbers.formatDecimal(product.price, 1, 'DEFAULT', 2, 'DEFAULT')}"
+                  ></h4>
+                </div>
+                <div class="col-3">
+                  <a
+                    th:href="|/view-product/${product.id}|"
+                    class="btn btn-outline-primary"
+                  >
+                    View product</a
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger bi bi-trash-fill"
+                    th:onclick="|deleteFromWishlist(${product.id})|"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col text-center">
+              <a href="/account/view-account" class="btn btn-outline-primary"
+                >&leftarrow; Back to account</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container"></div>
+    <div th:replace="fragments/footer.html"></div>
+    <script src="/js/wishlist/wishlist.js" type="text/javascript"></script>
+  </body>
+</html>

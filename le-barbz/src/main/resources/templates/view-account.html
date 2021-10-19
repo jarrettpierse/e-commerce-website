@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div th:replace="fragments/covid-banner.html"></div>
+    <div class="container">
+      <div class="main-content">
+        <!-- Header container -->
+        <div class="container-fluid d-flex align-items-center">
+          <div class="row">
+            <div class="col-lg-7 col-md-10">
+              <h1 class="display-2 text-black" th:text="'Hello '+${user.getFirstname()+'!'}"></h1>
+              <p class="text-black mt-0 mb-5">
+                This is your account page. You can see the orders you've made
+                and manage your account from here!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Page content -->
+      <div class="container-fluid mt--7">
+        <div class="row">
+          <div class="col-xl-3 order-l-2 mb-0 mb-xl-0">
+            <div class="card card-profile shadow">
+              <div class="card-body pt-0">
+                <div class="text-center">
+                  <h3 th:text="${user.getFirstname()} + ' ' + ${user.getSurname()}"><span class="font-weight-light"></span></h3>
+                  <div class="h5 mt-2">
+                    <i class="ni business_briefcase-24 mr-2" sec:authorize="hasAuthority('USER')">Customer</i>
+                    <i class="ni business_briefcase-24 mr-2" sec:authorize="hasAuthority('ADMIN')">Admin</i>
+                    
+                  </div>
+                  <hr class="my-2" />
+                  <a href="/account/wishlist" class="btn btn-sm btn-primary"
+                    >View my Wish List</a
+                  >
+                  <a href="/account/orders" class="btn btn-sm btn-primary"
+                    >View Orders</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-8 order-xl-1">
+            <div class="card bg-secondary shadow">
+              <div class="card-header bg-white border-0">
+                <div class="row align-items-center">
+                  <div class="col-8">
+                    <h3 class="mb-0">My account</h3>
+                  </div>
+                  <div class="col-4 text-right">
+                    <button id="applyChanges" name="applyChanges" class="btn btn-sm btn-primary">
+                      Apply Changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body text-white">
+                <form class="needs-validation">
+                  <h6 class="mb-4">User information</h6>
+                  <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="username"
+                            >Username</label
+                          >
+                          <input
+                            type="text"
+                            id="username"
+                            class="form-control form-control-alternative"
+                            placeholder="Username"
+                            th:value="${user.getUserName()}"
+                            disabled
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="email"
+                            >Email address</label
+                          >
+                          <input
+                            type="email"
+                            id="email"
+                            class="form-control form-control-alternative"
+                            th:value="${user.getEmail()}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="form-group focused">
+                          <label
+                            class="form-control-label"
+                            for="firstname"
+                            >First name</label
+                          >
+                          <input
+                            type="text"
+                            id="firstname"
+                            class="form-control form-control-alternative"
+                            placeholder="First name"
+                            th:value="${user.getFirstname()}"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group focused">
+                          <label
+                            class="form-control-label"
+                            for="lastname"
+                            >Last name</label
+                          >
+                          <input
+                            type="text"
+                            id="lastname"
+                            class="form-control form-control-alternative"
+                            placeholder="Last name"
+                            th:value="${user.getSurname()}"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group focused">
+                          <label
+                            class="form-control-label"
+                            for="phone"
+                            >Phone number</label
+                          >
+                          <input
+                            type="tel"
+                            id="phone"
+                            class="form-control form-control-alternative"
+                            placeholder="Phone number"
+                            th:value="${user.getPhone()}"
+                          />
+                        </div>
+                      </div>
+                  </div>
+                  <hr class="my-4" />
+                  <!-- Address -->
+                  <h6 class="heading-small mb-4">Your Address</h6>
+                  <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="homeaddress1"
+                            >Address Line 1</label
+                          >
+                          <input
+                            id="homeaddress1"
+                            name="homeaddress1"
+                            class="form-control form-control-alternative"
+                            placeholder="Address Line 1"
+                            th:value="${user.getAddressLine1()}"
+                            type="text"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="homeaddress2"
+                          >Address Line 2</label
+                          >
+                          <input
+                                  id="homeaddress2"
+                                  name="homeaddress2"
+                                  class="form-control form-control-alternative"
+                                  placeholder="Home Address"
+                                  th:value="${user.getAddressLine2()}"
+                                  type="text"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="city"
+                            >City</label
+                          >
+                          <input
+                            type="text"
+                            name="city"
+                            id="city"
+                            class="form-control form-control-alternative"
+                            placeholder="City"
+                            th:value="${user.getCity()}"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="county"
+                          >County/State</label
+                          >
+                          <input
+                                  type="text"
+                                  id="county"
+                                  name="county"
+                                  class="form-control form-control-alternative"
+                                  placeholder="County"
+                                  th:value="${user.getCounty()}"
+                          />
+                        </div>
+                      </div>
+                      <div class=".w-100"></div>
+                      <div class="col">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="country"
+                          >Country</label>
+                          <input
+                                  type="text"
+                                  id="country"
+                                  name="country"
+                                  class="form-control form-control-alternative"
+                                  placeholder="Country"
+                                  th:value="${user.getCountry()}"
+                          />
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="form-control-label" for="postalcode"
+                          >Postal code</label>
+                          <input
+                                  id="postcode"
+                                  name="postalcode"
+                                  class="form-control form-control-alternative"
+                                  placeholder="Postal code"
+                                  th:value="${user.getPostalCode()}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="success-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-success">Account Successfully Modified!</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Account successfully modified. Please wait while
+              the page refreshes to reflect changes.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="failure-modal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-danger">Failed to Modify Account</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Unfortunately, something went wrong, and the account could not be
+              modified.
+            </p>
+            <h5>Error Message:</h5>
+            <p id="failure-error-message"></p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div th:replace="fragments/footer.html"></div>
+  </body>
+  <script src="/js/account/account-control.js"></script>
+</html>

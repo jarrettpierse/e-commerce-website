@@ -1,0 +1,21 @@
+<div class="row d-flex justify-content-right g-1" >
+  <div class="col-md-4" th:each="product : ${products}" th:unless="${product.hidden}">
+      <div class="card text-center h-100" >
+        <a
+          style="text-decoration: none"
+          th:href="@{/view-product/{id}(id=${product.id})}"
+          ><img
+            th:src="@{${'/images/products/' + product.imageURL}}"
+            height="250"
+          />
+          <div class="about text-left px-3">
+            <h4 th:text="${product.name}"></h4>
+            <p class="text-muted" th:text="${product.type}"></p>
+            <h3
+              th:text="'€' + ${#numbers.formatDecimal(product.price, 1, 'DEFAULT', 2, 'DEFAULT')}"
+            ></h3>
+          </div>
+        </a>
+      </div>
+  </div>
+</div>

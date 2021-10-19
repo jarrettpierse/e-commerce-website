@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <div th:replace="fragments/head.html"></div>
+    <title>Le Barbz</title>
+  </head>
+  <body class="bg-light d-flex flex-column min-vh-100">
+    <div th:replace="fragments/header.html"></div>
+    <div th:replace="fragments/covid-banner.html"></div>
+    <div class="container justify-content-center">
+      <div class="row">
+        <div
+          id="carouselExampleControls"
+          class="carousel slide col px-0"
+          data-bs-ride="carousel"
+        >
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="images/person_smiling.jfif"
+                class="d-block w-100"
+                alt="person smiling in front of a yellow wall"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="images/clothes_on_rack.jfif"
+                class="d-block w-100"
+                alt="sweaters hanging on a rack"
+              />
+            </div>
+            <div class="carousel-item">
+              <img
+                src="images/ipad_on_jeans.jfif"
+                class="d-block w-100"
+                alt="Apple iPad sitting on jeans, surrounded by various apparel and accessories"
+              />
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleControls"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card col">
+          <div class="card-body text-center">
+            <h5 class="card-title">Welcome to Le Barbz</h5>
+            <h6 class="card-text">
+              Here at Le Barbz, we pride ourselves on offering a wide, high
+              quality range of merchandise to our customers.
+            </h6>
+            <h6 class="card-text">
+              Operating since 1992, Le Barbz has garnered a reputation for being
+              the premier destination for customized merchandise!
+            </h6>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card col">
+          <div class="card-body text-center">
+            <h5 class="card-title">Browse Our Products</h5>
+            <div th:replace="fragments/product-categories.html"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="fragments/footer.html"></footer>
+  </body>
+</html>
